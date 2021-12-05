@@ -3,6 +3,11 @@ import pandas as pd
 VALUES = [i for i in range(6)]
 ZERO = [0]
 ONE = [1]
+GENDER_VAL = ['Female', 'Male']
+SATISFACTION_VAL = ['neutral or dissatisfied', 'satisfied']
+TRAVEL_VAL = ['Business travel', 'Personal Travel']
+CLASS_VAL = ['Business', 'Eco', 'Eco Plus']
+
 
 COLUMNS = ['Age', 'Flight Distance', 'Departure Delay in Minutes',
            'Arrival Delay in Minutes', 'Gender_Female', 'Gender_Male',
@@ -54,8 +59,29 @@ def assert_numeric(input: dict, output: dict, key: str, col: str):
         output[col] = [input[key]]
 
 
-def assert_categorical_str(input: dict, output: dict, key: str, col: str, val: list[str]):
-    val_columns = ['']
+def assert_categorical_str(input: dict, output: dict, key: str, col: str, val_enums: list[str]):
+    check = [i for i in range(len(val_enums))]
+    val_cols = []
+    for val in val_enums:
+        real_col = f"{col}_{val}"
+        val_cols.append(real_col)
+
+    exist = key in input.keys()
+    if exist:
+        val = input[key]
+        if val in check:
+            for i in range(len(val_cols)):
+                if val == i:
+                    output[val_cols[i]] = ONE
+                else:
+                    output[val_cols[i]] = ZERO
+        else:
+            for i in range(len(val_cols)):
+                output[val_cols[i]] = ZERO
+
+    else:
+        for i in range(len(val_cols)):
+            output[val_cols[i]] = ZERO
 
 
 def assert_categorical_num(input: dict, output: dict, key: str, col: str):
@@ -76,7 +102,8 @@ def assert_categorical_num(input: dict, output: dict, key: str, col: str):
         else:
             for VAL in VALUES:
                 output[val_cols[VAL]] = ZERO
-    if not exist:
+
+    else:
         for VAL in VALUES:
             output[val_cols[VAL]] = ZERO
 
@@ -88,10 +115,17 @@ def sanitize(input: dict) -> dict:
     assert_numeric(input, out, 'flight_distance', 'Flight Distance')
     assert_numeric(input, out, 'delay', 'Departure Delay in Minutes')
     assert_numeric(input, out, 'arrival', 'Arrival Delay in Minutes')
-    # assert_column_numeric()
+
+    assert_categorical_str(input, out, 'gender', 'Gender', GENDER_VAL)
+    assert_categorical_str(input, out, 'satisfied',
+                           'satisfaction', SATISFACTION_VAL)
+    assert_categorical_str(input, out, 'travel_type',
+                           'Type of Travel', TRAVEL_VAL)
+    assert_categorical_str(input, out, 'class', 'Class', CLASS_VAL)
+
+    assert_categorical_num(input, out, 'wifi', 'Inflight wifi service')
     assert_categorical_num(
         input, out, 'departure_arrival_convenient', 'Departure/Arrival time convenient')
-    assert_categorical_num(input, out, 'wifi', 'Inflight wifi service')
     assert_categorical_num(input, out, 'online_booking',
                            'Ease of Online booking')
     assert_categorical_num(input, out, 'gate_location', 'Gate location')
@@ -103,16 +137,17 @@ def sanitize(input: dict) -> dict:
     assert_categorical_num(input, out, 'onboard_service', 'On-board service')
     assert_categorical_num(input, out, 'leg_room_service', 'Leg room service')
     assert_categorical_num(input, out, 'baggage', 'Baggage handling')
+    out.pop('Baggage handling_0')
+    assert_categorical_num(input, out, 'checkin', 'Checkin service')
     assert_categorical_num(input, out, 'inflight', 'Inflight service')
     assert_categorical_num(input, out, 'cleanliness', 'Cleanliness')
 
-    print(out)
+    # print(out)
     return out
 
 
 def to_dataframe(input) -> pd.DataFrame:
     df = pd.DataFrame.from_dict(sanitize(input))
-    # df = df[['Flight Distance', 'Age']]
-    # print(df.head(0))
-    print(df.columns)
-    # print(df.head(1))
+    df[COLUMNS]
+
+    return df

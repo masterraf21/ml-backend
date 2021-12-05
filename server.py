@@ -6,6 +6,7 @@ import numpy as np
 import json
 import pickle
 import pandas as pd
+from werkzeug.wrappers import response
 import util
 
 app = Flask(__name__)
@@ -20,7 +21,7 @@ def home():
     res = app.response_class(
         mimetype="application/json",
         response=json.dumps({
-            "messagge": "Hello Stranger"
+            "message": "Hello Stranger"
         })
     )
 
@@ -31,9 +32,17 @@ def home():
 def predict():
     # Get the data from the POST request.
     data = request.get_json(force=True)
+    df = util.to_dataframe(data)
 
-    util.to_dataframe(data)
-    return jsonify(str("HELLO"))
+    prediction = model.predict(df)
+    output = prediction[0]
+
+    return app.response_class(
+        mimetype="application/json",
+        response=json.dumps({
+            "data": str(output)
+        })
+    )
 
 
 if __name__ == '__main__':
