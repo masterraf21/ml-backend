@@ -8,6 +8,12 @@ import pickle
 import pandas as pd
 from werkzeug.wrappers import response
 import util
+from waitress import serve
+
+import logging
+logging.basicConfig()
+logger = logging.getLogger('waitress')
+logger.setLevel(logging.DEBUG)
 
 app = Flask(__name__)
 CORS(app)
@@ -46,4 +52,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(threaded=True, host='0.0.0.0', port=5500)
+    serve(app=app, host='0.0.0.0', port=5500)

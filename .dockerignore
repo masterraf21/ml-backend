@@ -1,0 +1,7 @@
+cobacoba/
+*.md
+test/
+__pycache__
+df.txt
+Dockerfile
+*.yaml
