@@ -1,0 +1,26 @@
+{
+  "age": 20,
+  "flight_distance": 192,
+  "departure_delay": 0,
+  "arrival_delay": 0.0,
+
+  "gender": 1,
+  "satisfied": 0,
+  "travel_type": 0,
+  "class": 1,
+
+  "wifi": 2,
+  "departure_arrival_convenient": 0,
+  "online_booking": 2,
+  "gate_location": 4,
+  "food_drink": 2,
+  "online_boarding": 2,
+  "seat_comfort": 2,
+  "entertainment": 2,
+  "onboard_service": 4,
+  "leg_room_service": 1,
+  "baggage": 3,
+  "checkin": 2,
+  "inflight": 2,
+  "cleanliness": 2
+}
