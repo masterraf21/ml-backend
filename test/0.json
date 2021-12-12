@@ -1,0 +1,26 @@
+{
+  "age": 52,
+  "flight_distance": 160,
+  "departure_delay": 50,
+  "arrival_delay": 44.0,
+
+  "gender": 0,
+  "satisfied": 1,
+  "travel_type": 0,
+  "class": 1,
+
+  "wifi": 5,
+  "departure_arrival_convenient": 4,
+  "online_booking": 3,
+  "gate_location": 4,
+  "food_drink": 3,
+  "online_boarding": 4,
+  "seat_comfort": 3,
+  "entertainment": 5,
+  "onboard_service": 5,
+  "leg_room_service": 5,
+  "baggage": 5,
+  "checkin": 2,
+  "inflight": 5,
+  "cleanliness": 5
+}

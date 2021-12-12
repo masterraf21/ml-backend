@@ -113,8 +113,8 @@ def sanitize(input: dict) -> dict:
 
     assert_numeric(input, out, 'age', 'Age')
     assert_numeric(input, out, 'flight_distance', 'Flight Distance')
-    assert_numeric(input, out, 'delay', 'Departure Delay in Minutes')
-    assert_numeric(input, out, 'arrival', 'Arrival Delay in Minutes')
+    assert_numeric(input, out, 'departure_delay', 'Departure Delay in Minutes')
+    assert_numeric(input, out, 'arrival_delay', 'Arrival Delay in Minutes')
 
     assert_categorical_str(input, out, 'gender', 'Gender', GENDER_VAL)
     assert_categorical_str(input, out, 'satisfied',

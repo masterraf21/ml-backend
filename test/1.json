@@ -1,0 +1,26 @@
+{
+  "age": 36,
+  "flight_distance": 2863,
+  "departure_delay": 0,
+  "arrival_delay": 0.0,
+
+  "gender": 0,
+  "satisfied": 1,
+  "travel_type": 0,
+  "class": 0,
+
+  "wifi": 1,
+  "departure_arrival_convenient": 1,
+  "online_booking": 3,
+  "gate_location": 1,
+  "food_drink": 5,
+  "online_boarding": 4,
+  "seat_comfort": 5,
+  "entertainment": 4,
+  "onboard_service": 4,
+  "leg_room_service": 4,
+  "baggage": 4,
+  "checkin": 3,
+  "inflight": 4,
+  "cleanliness": 5
+}
