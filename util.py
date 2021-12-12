@@ -56,7 +56,13 @@ def assert_numeric(input: dict, output: dict, key: str, col: str):
     if key not in input.keys():
         output[col] = ZERO
     else:
-        output[col] = [input[key]]
+        val = input[key]
+        if isinstance(val, str):
+            parsed = val.split(".")
+            if (len(parsed) > 1):
+                output[col] = [float(val)]
+        else:
+            output[col] = [val]
 
 
 def assert_categorical_str(input: dict, output: dict, key: str, col: str, val_enums: list[str]):
@@ -147,7 +153,8 @@ def sanitize(input: dict) -> dict:
 
 
 def to_dataframe(input) -> pd.DataFrame:
-    df = pd.DataFrame.from_dict(sanitize(input))
+    clean_data = sanitize(input)
+    df = pd.DataFrame.from_dict(clean_data)
     df[COLUMNS]
 
     return df
